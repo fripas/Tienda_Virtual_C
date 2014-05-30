@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1401430809 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\productos.cpp
+	"Productos.h"
+
+1401430982 c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\productos.h
+	"Carrito.h"
+
+1401430994 c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\carrito.h
+	"Productos.h"
+	"Clientes.h"
+
+1401430886 c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\clientes.h
+
+1385320478 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\main.cpp
+	<iostream>
+
