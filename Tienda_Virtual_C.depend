@@ -38,3 +38,42 @@
 	<string.h>
 	<stdlib.h>
 
+1402594903 source:c:\users\toshi\documents\github\tienda_virtual_c\clases\carrito.cpp
+	"Carrito.h"
+	"Productos.h"
+	<iostream>
+	<fstream>
+	<string.h>
+	<stdlib.h>
+
+1402594903 c:\users\toshi\documents\github\tienda_virtual_c\clases\carrito.h
+	<fstream>
+
+1402594903 c:\users\toshi\documents\github\tienda_virtual_c\clases\productos.h
+	<fstream>
+
+1402601679 source:c:\users\toshi\documents\github\tienda_virtual_c\clases\clientes.cpp
+	"Clientes.h"
+	<iostream>
+	<fstream>
+	<string.h>
+	<stdlib.h>
+
+1402594903 c:\users\toshi\documents\github\tienda_virtual_c\clases\clientes.h
+	<fstream>
+
+1402594903 source:c:\users\toshi\documents\github\tienda_virtual_c\clases\productos.cpp
+	"Productos.h"
+	<iostream>
+	<fstream>
+	<string.h>
+	<stdlib.h>
+
+1402594903 source:c:\users\toshi\documents\github\tienda_virtual_c\main.cpp
+	<iostream>
+	<windows.h>
+	<stdlib.h>
+	"Productos.h"
+	"Clientes.h"
+	"Carrito.h"
+

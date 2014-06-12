@@ -15,6 +15,7 @@ void accion(int,char);
 
 Productos productos;
 Carrito carrito;
+Clientes clientes;
 
 char usr[30];
 int idUsr=1;
@@ -37,8 +38,9 @@ void ingreso(){
     cout<<" ศออออออออออออออออออออออออผ"<<endl;
     setxy(11,5);
     cin>>nombre;
+    idUsr = clientes.buscar(nombre);
     //asignar a idUsr (variable global) el resultado de clientes.buscar(nombre);
-    int tipo = 2;//asignar a tipo el resultado de clientes.tipo(idUsr);
+    int tipo = clientes.tipo(idUsr);
     strcpy(usr,nombre);
     menu(tipo,0);
 }
@@ -80,7 +82,7 @@ void menu(int tipo,char op2){
             setxy(12,19);
             cin>>op;
             if(op=='1'){
-                //clientes.agregar();
+                clientes.agregar();
             }
             else{
                 color(7);
@@ -163,7 +165,7 @@ void menu(int tipo,char op2){
 
 void accion(int tipo,char op){
     char op2;
-    int idP;
+    int idP,idC;
     switch(tipo){
         case 1:
             setxy(40,7);
@@ -241,19 +243,19 @@ void accion(int tipo,char op){
                     setxy(0,13);
                     switch(op2){
                         case '1':
-                            //clientes.mostrar();
+                            clientes.mostrar();
                             menu(tipo,op);
                             break;
                         case '2':
-                            //clientes.agregar();
+                            clientes.agregar();
                             menu(tipo,op);
                             break;
                         case '3':
-                            //clientes.modificar(idC);
+                            clientes.modificar(idC);
                             menu(tipo,op);
                             break;
                         case '4':
-                            //clientes.borrar(idC);
+                            clientes.borrar(idC);
                             menu(tipo,op);
                             break;
                         case '5':
@@ -376,15 +378,15 @@ void accion(int tipo,char op){
                     setxy(0,12);
                     switch(op2){
                         case '1':
-                            //clientes.mostrar(idUsr);
+                            clientes.ver(idUsr);
                             menu(tipo,op);
                             break;
                         case '2':
-                            //clientes.modificar(idUsr);
+                            clientes.modificar(idUsr);
                             menu(tipo,op);
                             break;
                         case '3':
-                            //clientes.borrar(idUsr);
+                            clientes.borrar(idUsr);
                             menu(tipo,op);
                             break;
                         case '4':
