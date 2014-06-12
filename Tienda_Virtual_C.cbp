@@ -34,7 +34,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Clases/Carrito.cpp" />
 		<Unit filename="Clases/Carrito.h" />
+		<Unit filename="Clases/Clientes.cpp" />
 		<Unit filename="Clases/Clientes.h" />
 		<Unit filename="Clases/Productos.cpp" />
 		<Unit filename="Clases/Productos.h" />

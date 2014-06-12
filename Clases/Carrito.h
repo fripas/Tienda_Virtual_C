@@ -1,29 +1,27 @@
 #ifndef CARRITO_H_INCLUDED
 #define CARRITO_H_INCLUDED
-#include "Productos.h"
-#include "Clientes.h"
-#define MAX 10
+#include <fstream>
 
-struct strProducto2{
-    int id,cantidad;
-    char nombre[30],descripcion[100];
-    float precio;
-};
-
-struct strCarrito{
-    int idCliente;
-    strProducto2 productos[MAX];
-};
+const int MAX = 20;
+using namespace std;
 
 class Carrito{
     private:
-        char *dir="carrito.dat";
+        const char *dir="carrito.dat";
+        struct strDatos{
+            int idCliente,tam,productos[MAX];
+        }datos;
+        fstream archB;
     public:
         Carrito();
-        void quitarProducto(int);
-        int buscarProducto(char*);
-        void verCarrito();
-        void borrarCarrito(int);
+        void agregar(int,int);
+        void todo();
+        void quitar(int,int);
+        int buscar(int);
+        void mostrar(int);
+        void vaciar(int);
 };
+
+
 
 #endif // CARRITO_H_INCLUDED
