@@ -15,7 +15,12 @@ Clientes::Clientes(){
             cerr<<"No se pudo crear el archivo"<<endl;
             return;
         }
-        datos.id=0;
+        datos.id=1;
+        datos.tipo=1;
+        strcpy(datos.nombre,"admin");
+        strcpy(datos.direccion,"UAA");
+        strcpy(datos.email,"admin@uaa.mx");
+        strcpy(datos.telefono,"4491234567");
         archB.write((char*)&datos,sizeof(strDatos));
     }
     archB.close();
@@ -38,6 +43,7 @@ void Clientes::mostrar(){
                 cout<<"É";
                 for(int i=0;i<77;i++) cout<<"Í";
                 cout<<"»"<<endl<<endl;
+                cout<<"\tId: "<<datos.id<<endl;
                 cout<<"\tNombre: "<<datos.nombre<<endl;
                 cout<<"\tDireccion: "<<datos.direccion<<endl;
                 cout<<"\tEmail: "<<datos.email<<endl;
@@ -65,11 +71,12 @@ void Clientes::agregar(){
         if(datos.id!=0)
             id++;
         cout<<"Alta de Clientes"<<endl;
+        datos.tipo=2;//Tipo de usuario normal
         datos.id=id;
         cout<<"Nombre del cliente: ";
         cin.sync();
         cin.getline(datos.nombre,30);
-        cout<<"Dirección del cliente: ";
+        cout<<"Direccion del cliente: ";
         cin.sync();
         cin.getline(datos.direccion,50);
         cout<<"Email: ";
@@ -89,7 +96,7 @@ void Clientes::agregar(){
 
 void Clientes::modificar(int idC){
     if(buscar(idC)==-1){
-        cerr<<"El producto no existe."<<endl;
+        cerr<<"El cliente no existe."<<endl;
         system("Pause");
         return;
     }
@@ -115,13 +122,13 @@ void Clientes::modificar(int idC){
         archB.seekp((datos.id-1)*sizeof(strDatos),ios::beg);
         //Graba la estructura
         archB.write((char*)&datos,sizeof(strDatos));
-        cout<<"El producto se modifico correctamente."<<endl;
+        cout<<"El cliente se modifico correctamente."<<endl;
     }
     archB.close();
     system("Pause");
 }
 
-int Clientes::buscar(const char* nombre){
+int Clientes::buscar(const char* nombreC){
     int idC=-1;
     archB.open(dir,ios::binary|ios::in);
     if(archB.fail()){
@@ -130,19 +137,18 @@ int Clientes::buscar(const char* nombre){
     else{
         archB.read((char*)&datos,sizeof(strDatos));
         while(!archB.eof()){
-            if(strcmp(datos.nombre,nombre)==0){
+            if(strcmp(datos.nombre,nombreC)==0){
                 idC=datos.id;
                 archB.close();
-                ver(idC);
-                system("Pause");
+                return idC;
+                //ver(idC);
+                //system("Pause");
                 break;
             }
             archB.read((char*)&datos,sizeof(strDatos));
         }
     }
     if(idC==-1){
-        cout<<"No se encontraron resultados de la busqueda"<<endl;
-        system("Pause");
         archB.close();
     }
     return idC;
@@ -187,12 +193,13 @@ void Clientes::ver(int idC){
             cout<<"»"<<endl<<endl;
             cout<<"\tId: "<<datos.id<<endl;
             cout<<"\tNombre: "<<datos.nombre<<endl;
-            cout<<"\tDirección: "<<datos.direccion<<endl;
+            cout<<"\tDireccion: "<<datos.direccion<<endl;
             cout<<"\tEmail: "<<datos.email<<endl;
-            cout<<"\tPTelefono: $"<<datos.telefono<<endl<<endl;
+            cout<<"\tTelefono: "<<datos.telefono<<endl<<endl;
             cout<<"È";
             for(int i=0;i<77;i++) cout<<"Í";
             cout<<"¼"<<endl;
+            system("Pause");
         }
     }
     archB.close();
@@ -210,10 +217,11 @@ void Clientes::borrar(int idC){
         cerr<<"Error al abrir el archivo"<<endl;
     }
     else{
-        cout<<"Esta seguro de borrar el producto?"<<endl;
+        cout<<"Esta seguro de borrar la cuenta?"<<endl;
         cout<<"\t1) Si"<<endl;
         cout<<"\t2) No"<<endl;
         cout<<"Opcion: ";
+        cin.sync();
         cin>>op;
         if(op=='1'){
             datos.id=0;
@@ -221,24 +229,30 @@ void Clientes::borrar(int idC){
             archB.seekp((idC-1)*sizeof(strDatos),ios::beg);
             //Graba la estructura
             archB.write((char*)&datos,sizeof(strDatos));
-            cout<<"El cliete se elimino correctamente."<<endl;
+            cout<<"El cliente se elimino correctamente."<<endl;
         }
     }
     archB.close();
     system("Pause");
 }
 
-int Clientes::tipo(int idUsr){
-    switch (datos.tipo){
-        case 0:
-
-        break;
-        case 1:
-
-        break;
-        case 2:
-
-        break;
+int Clientes::tipo(int idC){
+    int tipo=0;
+    if(buscar(idC)==-1){
+        return 0;
     }
+    archB.open(dir,ios::binary|ios::in);
+    if(archB.fail()){
+        cerr<<"Error al abrir el archivo"<<endl;
+    }
+    else{
+        archB.seekg((idC-1)*sizeof(strDatos),ios::beg);
+        archB.read((char*)&datos,sizeof(strDatos));
+        if(!archB.eof()){
+            tipo=datos.tipo;
+        }
+    }
+    archB.close();
+    return tipo;
 }
 

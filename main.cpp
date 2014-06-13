@@ -18,7 +18,7 @@ Carrito carrito;
 Clientes clientes;
 
 char usr[30];
-int idUsr=1;
+int idUsr=0;
 
 int main(){
     ingreso();
@@ -82,7 +82,10 @@ void menu(int tipo,char op2){
             setxy(12,19);
             cin>>op;
             if(op=='1'){
+                setxy(0,23);
                 clientes.agregar();
+                color(7);
+                ingreso();
             }
             else{
                 color(7);
@@ -251,10 +254,14 @@ void accion(int tipo,char op){
                             menu(tipo,op);
                             break;
                         case '3':
+                            cout<<"Introduce el id del cliente: ";
+                            cin>>idC;
                             clientes.modificar(idC);
                             menu(tipo,op);
                             break;
                         case '4':
+                            cout<<"Introduce el id del cliente: ";
+                            cin>>idC;
                             clientes.borrar(idC);
                             menu(tipo,op);
                             break;
@@ -263,6 +270,11 @@ void accion(int tipo,char op){
                             break;
                     }
                     break;
+                case '3':
+                    color(7);
+                    ingreso();
+                    break;
+
             }
             break;
         case 2:
@@ -387,13 +399,19 @@ void accion(int tipo,char op){
                             break;
                         case '3':
                             clientes.borrar(idUsr);
-                            menu(tipo,op);
+                            color(7);
+                            ingreso();
                             break;
                         case '4':
                             menu(tipo,0);
                             break;
                     }
                     break;
+                case '4':
+                    color(7);
+                    ingreso();
+                    break;
+
             }
             break;
     }
