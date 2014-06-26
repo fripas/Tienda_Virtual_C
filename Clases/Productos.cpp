@@ -37,9 +37,9 @@ void Productos::mostrar(){
         archB.seekg(0, ios::beg);
         archB.read((char*)&datos,sizeof(strDatos));
         while(!archB.eof()){
-            if(datos.id>0){
+            if(datos.id>0){//Si el producto tiene un id diferente de 0
                 cout<<"É";
-                for(int i=0;i<77;i++) cout<<"Í";
+                for(int i=0;i<77;i++) cout<<"Í";//Linea superior
                 cout<<"»"<<endl<<endl;
                 cout<<"\tId: "<<datos.id<<endl;
                 cout<<"\tNombre: "<<datos.nombre<<endl;
@@ -47,10 +47,10 @@ void Productos::mostrar(){
                 cout<<"\tDisponibles: "<<datos.cantidad<<endl;
                 cout<<"\tPrecio: $"<<datos.precio<<endl<<endl;
                 cout<<"È";
-                for(int i=0;i<77;i++) cout<<"Í";
+                for(int i=0;i<77;i++) cout<<"Í";//Linea inferior
                 cout<<"¼"<<endl;
             }
-            archB.read((char*)&datos,sizeof(strDatos));
+            archB.read((char*)&datos,sizeof(strDatos));//Lee el siguiente producto
         }
     }
     system("Pause");
@@ -133,10 +133,10 @@ float Productos::getPrecio(int idP){
         cerr<<"Error al abrir el archivo Precio"<<endl;
     }
     else{
-        archB.seekg((idP-1)*sizeof(strDatos),ios::beg);
-        archB.read((char*)&datos,sizeof(strDatos));
+        archB.seekg((idP-1)*sizeof(strDatos),ios::beg);//Hacia la posicion del id
+        archB.read((char*)&datos,sizeof(strDatos));//Lee el producto
         if(!archB.eof()){
-            tmp=datos.precio;
+            tmp=datos.precio;//Guarda el precio en la variable tmp
         }
     }
     archB.close();
@@ -155,9 +155,9 @@ int Productos::getCantidad(int idP){
     }
     else{
         archB.seekg((idP-1)*sizeof(strDatos),ios::beg);
-        archB.read((char*)&datos,sizeof(strDatos));
+        archB.read((char*)&datos,sizeof(strDatos));//Lee el producto
         if(!archB.eof()){
-            tmp=datos.cantidad;
+            tmp=datos.cantidad;//Guarda la cantidad en tmp
         }
     }
     archB.close();
@@ -174,6 +174,7 @@ void Productos::setCantidad(int idP,int cant){
         cerr<<"Error al abrir el archivo"<<endl;
     }
     else{
+        //Asigna la cantidad recibida por parametro
         datos.cantidad=cant;
         //Colocar el puntero en la posicion del id
         archB.seekp((datos.id-1)*sizeof(strDatos),ios::beg);
@@ -182,6 +183,7 @@ void Productos::setCantidad(int idP,int cant){
     }
     archB.close();
 }
+//Busca por id
 int Productos::buscar(int idP){
     archB.open(dir,ios::binary|ios::in);
     if(archB.fail()){
@@ -201,6 +203,7 @@ int Productos::buscar(int idP){
     archB.close();
     return idP;
 }
+//Busca por nombre
 int Productos::buscar(const char *nombre){
     int idP=-1;
     archB.open(dir,ios::binary|ios::in);
@@ -227,6 +230,7 @@ int Productos::buscar(const char *nombre){
     }
     return idP;
 }
+//Muestra producto
 void Productos::ver(int idP){
     if(buscar(idP)==-1){
         cerr<<"El producto no existe."<<endl;
@@ -238,8 +242,8 @@ void Productos::ver(int idP){
         cerr<<"Error al abrir el archivo"<<endl;
     }
     else{
-        archB.seekg((idP-1)*sizeof(strDatos),ios::beg);
-        archB.read((char*)&datos,sizeof(strDatos));
+        archB.seekg((idP-1)*sizeof(strDatos),ios::beg);//Mueve hacia el id
+        archB.read((char*)&datos,sizeof(strDatos));//Lee el producto
         if(!archB.eof()){
             cout<<"É";
             for(int i=0;i<77;i++) cout<<"Í";
@@ -274,6 +278,7 @@ void Productos::borrar(int idP){
         cout<<"Opcion: ";
         cin>>op;
         if(op=='1'){
+            //Asigna el id en 0 (Borrado logico)
             datos.id=0;
             //Colocar el puntero en la posicion del id
             archB.seekp((idP-1)*sizeof(strDatos),ios::beg);

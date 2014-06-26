@@ -41,7 +41,9 @@ void ingreso(){
     idUsr = clientes.buscar(nombre);
     //asignar a idUsr (variable global) el resultado de clientes.buscar(nombre);
     int tipo = clientes.tipo(idUsr);
+    //Copia el nombre en la variable global user para usarlo en todo el programa
     strcpy(usr,nombre);
+    //Llama a la sobrecarga con la opcion 0 para que se cargue la vista inicial
     menu(tipo,0);
 }
 
@@ -49,7 +51,7 @@ void menu(int tipo,char op2){
     system("cls");
     char op;
     switch(tipo){
-        case 0:
+        case 0: //Usuario inexistente
             color(12);
             setxy(0,0);
             cout<<"                             ษอออออออออออออออออออป"<<endl;
@@ -83,7 +85,7 @@ void menu(int tipo,char op2){
             cin>>op;
             if(op=='1'){
                 setxy(0,23);
-                clientes.agregar();
+                clientes.agregar(); //Registro
                 color(7);
                 ingreso();
             }
@@ -92,7 +94,7 @@ void menu(int tipo,char op2){
                 ingreso();
             }
             break;
-        case 1:
+        case 1: //Administrador
             color(10);
             setxy(0,0);
             cout<<endl;
@@ -127,7 +129,7 @@ void menu(int tipo,char op2){
                 accion(tipo,op);
             }
             break;
-        case 2:
+        case 2: //Comprardor
             color(10);
             setxy(0,0);
             cout<<endl;
@@ -164,6 +166,7 @@ void menu(int tipo,char op2){
             }
             break;
     }
+    menu(tipo,op2); //Se autollama para evitar errores
 }
 
 void accion(int tipo,char op){

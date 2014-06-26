@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1402604387 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\productos.cpp
+1403770405 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\productos.cpp
 	"Productos.h"
 	<iostream>
 	<fstream>
 	<string.h>
 	<stdlib.h>
 
-1402604387 c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\productos.h
+1403770194 c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\productos.h
 	<fstream>
 
 1402604387 c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\carrito.h
@@ -15,7 +15,7 @@
 1402604387 c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\clientes.h
 	<fstream>
 
-1402621625 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\main.cpp
+1403770888 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\main.cpp
 	<iostream>
 	<windows.h>
 	<stdlib.h>
@@ -23,7 +23,7 @@
 	"Clientes.h"
 	"Carrito.h"
 
-1402604387 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\carrito.cpp
+1403770783 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\carrito.cpp
 	"Carrito.h"
 	"Productos.h"
 	<iostream>
@@ -31,7 +31,7 @@
 	<string.h>
 	<stdlib.h>
 
-1402621548 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\clientes.cpp
+1403770479 source:c:\users\felipe moreno\documents\github\tienda_virtual_c\clases\clientes.cpp
 	"Clientes.h"
 	<iostream>
 	<fstream>

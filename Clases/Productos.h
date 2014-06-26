@@ -17,16 +17,16 @@ class Productos{
     public:
         Productos();
         void pausa();
-        void mostrar();
-        void agregar();
-        void modificar(int);
-        float getPrecio(int);
-        int getCantidad(int);
-        void setCantidad(int,int);
-        int buscar(const char*);
-        int buscar(int);
-        void ver(int);
-        void borrar(int);
+        void mostrar();//Lista los productos
+        void agregar();//Agrega un producto
+        void modificar(int);//Modifca un producto
+        float getPrecio(int);//Obtener precio
+        int getCantidad(int);//Obtener stock
+        void setCantidad(int,int);//Asignar stock
+        int buscar(const char*);//Buscar por nombre
+        int buscar(int);//Buscar por id
+        void ver(int);//Muestra producto por id
+        void borrar(int);//Borrar por id
 };
 
 #endif // PRODUCTOS_H

@@ -41,11 +41,15 @@ void Carrito::agregar(int idC,int idP){
         if(!archB.eof()){//Si el carrito ya tiene datos
             cout<<"Agregar al carrito"<<endl;
             datos.idCliente=idC;
+            //Cantidad disponible en stock
             int cant=listaProductos.getCantidad(idP);
+            //Si hay producto en stock y el carrito no esta lleno
             if(datos.tam<MAX && cant>0){
+                //Guarda en el vector el producto al final
                 datos.productos[datos.tam]=idP;
-                datos.tam++;
+                datos.tam++;//Aumentar tamanio de vector
                 cant--;
+                //Disminuye el stock en -1
                 listaProductos.setCantidad(idP,cant);
                 //Colocar el puntero en la posicion del id
                 archB.seekp((datos.idCliente-1)*sizeof(strDatos),ios::beg);
@@ -64,6 +68,7 @@ void Carrito::agregar(int idC,int idP){
             cout<<"Agregar al carrito"<<endl;
             datos.idCliente=idC;
             datos.tam=0;
+            //El producto se guarda en la posicion 0
             datos.productos[datos.tam]=idP;
             datos.tam++;
             //Colocar el puntero en la posicion del id
@@ -88,11 +93,11 @@ void Carrito::quitar(int idC,int idP){
     }
     else{
         int ban=-1;
-        archB.seekg((idC-1)*sizeof(strDatos),ios::beg);
-        archB.read((char*)&datos,sizeof(strDatos));
+        archB.seekg((idC-1)*sizeof(strDatos),ios::beg);//Ir hacia el di
+        archB.read((char*)&datos,sizeof(strDatos));//Leer carrito
         if(!archB.eof()){
-            for(int i=0;i<datos.tam;i++){
-                if(idP==datos.productos[i]){
+            for(int i=0;i<datos.tam;i++){ //Recorre el vector de productos
+                if(idP==datos.productos[i]){ //Elimina el producto
                     cout<<"Se quito el producto "<<idP<<" del carrito"<<endl;
                     //Recorre los otros productos hacia atras
                     for(int j=i;j<datos.tam-1;j++){
@@ -101,8 +106,10 @@ void Carrito::quitar(int idC,int idP){
                     //Elimina el ultimo producto del carrito
                     datos.productos[datos.tam]=0;
                     ban=idP;
+                    //Se disminuye el tamanio en 1
                     datos.tam--;
                     int cant=listaProductos.getCantidad(idP);
+                    //Se aumenta el stock
                     listaProductos.setCantidad(idP,cant+1);
                     //Colocar el puntero en la posicion del id
                     archB.seekp((idC-1)*sizeof(strDatos),ios::beg);
@@ -135,16 +142,16 @@ void Carrito::mostrar(int idC){
         archB.read((char*)&datos,sizeof(strDatos));
         if(!archB.eof()){
             cout<<"É";
-            for(int i=0;i<77;i++) cout<<"Í";
+            for(int i=0;i<77;i++) cout<<"Í"; //Linea superior
             cout<<"»"<<endl<<endl;
             cout<<"\tProductos en el carrito "<<datos.tam<<endl;
-            for(int i=0;i<datos.tam;i++){
-                listaProductos.ver(datos.productos[i]);
-                total+=listaProductos.getPrecio(datos.productos[i]);
+            for(int i=0;i<datos.tam;i++){ //Recorre el vector de productos
+                listaProductos.ver(datos.productos[i]); //Muestra el producto
+                total+=listaProductos.getPrecio(datos.productos[i]); //Suma el precio al total
             }
             cout<<endl<<"\tTotal a pagar: $"<<total<<endl;
             cout<<endl<<"È";
-            for(int i=0;i<77;i++) cout<<"Í";
+            for(int i=0;i<77;i++) cout<<"Í";//Linea inferior
             cout<<"¼"<<endl;
         }
     }
@@ -165,7 +172,7 @@ void Carrito::vaciar(int idC){
     }
     else{
         archB.seekg((idC-1)*sizeof(strDatos),ios::beg);
-        archB.read((char*)&datos,sizeof(strDatos));
+        archB.read((char*)&datos,sizeof(strDatos));//Lee el carrito
         if(!archB.eof()){
             cout<<"Esta seguro de borrar el producto?"<<endl;
             cout<<"\t1) Si"<<endl;
@@ -176,10 +183,10 @@ void Carrito::vaciar(int idC){
                 datos.idCliente=0;
                 for(int i=0;i<datos.tam;i++){
                     cant=listaProductos.getCantidad(datos.productos[i]);
-                    listaProductos.setCantidad(datos.productos[i],cant+1);
-                    datos.productos[i]=0;
+                    listaProductos.setCantidad(datos.productos[i],cant+1); //Aumenta stock
+                    datos.productos[i]=0; //Inicializa en 0 el vector de productos
                 }
-
+                //Inicializa el tamanio en 0
                 datos.tam=0;
                 //Colocar el puntero en la posicion del id
                 archB.seekp((idC-1)*sizeof(strDatos),ios::beg);
@@ -192,7 +199,7 @@ void Carrito::vaciar(int idC){
     archB.close();
     system("Pause");
 }
-
+//Comprueba si el carrito existe
 int Carrito::buscar(int idC){
     archB.open(dir,ios::binary|ios::in);
     if(archB.fail()){

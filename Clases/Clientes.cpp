@@ -15,6 +15,7 @@ Clientes::Clientes(){
             cerr<<"No se pudo crear el archivo"<<endl;
             return;
         }
+        //Guarda el admin en el cascaron del archivo, para que siempre tenga acceso
         datos.id=1;
         datos.tipo=1;
         strcpy(datos.nombre,"admin");
@@ -224,6 +225,7 @@ void Clientes::borrar(int idC){
         cin.sync();
         cin>>op;
         if(op=='1'){
+            //Asigna id a 0 (borrado logico)
             datos.id=0;
             //Colocar el puntero en la posicion del id
             archB.seekp((idC-1)*sizeof(strDatos),ios::beg);
@@ -235,7 +237,7 @@ void Clientes::borrar(int idC){
     archB.close();
     system("Pause");
 }
-
+//Regresa el tipo de cliente (admin o normal)
 int Clientes::tipo(int idC){
     int tipo=0;
     if(buscar(idC)==-1){
